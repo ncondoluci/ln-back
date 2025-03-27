@@ -9,8 +9,8 @@ export class AccountService {
 
     async getAccountsByTag( tag: string ): Promise<Account[]> {
         try {
-            const accounts = await findAllAccounts();
-            return accounts;
+            console.log(this.repository);
+            return this.repository;
         } catch (error) {
             return [];
         }        
