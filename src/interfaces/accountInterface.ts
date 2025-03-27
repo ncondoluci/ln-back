@@ -5,15 +5,15 @@ export interface DataAPI {
 
 export interface Account {
   id: string;
-  crmid: string;
+  crmid: string;/* */
   name: string; /* */
   isGeoLocal: boolean;
   haveVoucher: boolean;
   cuit: string;
   status: string;
   tags: Tag[];
-  branches: Branch[];
-  benefits: Benefit[];
+  branches: Branch[];/* */
+  benefits: Benefit[]; /* */
   phone: null | string;
   email: null | string;
   web: null | string;
@@ -47,7 +47,7 @@ export interface Benefit {
   program_name: string[];
   name: string;
   type: string;
-  type_benefit: string;
+  type_benefit: string; /* */
   type_weight: number;
   category: string;
   subcategory: string;
@@ -97,7 +97,7 @@ export interface Branch {
   address: string;
   number: string;
   observations: null | string | string;
-  location: number;
+  location: number;/* */
   status: string;
   phone: null | null | string | string;
   virtualCard: boolean;
@@ -112,6 +112,6 @@ export interface Tag {
   type: string;
 }
 
-// export AccountTagged {
-  
-// }
+export interface VMAccountTagged {
+
+}
