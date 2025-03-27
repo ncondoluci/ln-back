@@ -4,11 +4,11 @@ import { Account } from '../interfaces/accountInterface.js';
 
 const FILE_PATH = join(process.cwd(), 'src/utils/accounts.json');
 
-export async function findAllAccounts(): Promise<Account[]> {
+export async function getAllAccounts(): Promise<Account[]> {
   try {
       const data = await readFile(FILE_PATH, 'utf8');
-      // const parsedData = JSON.parse(data) as Account[];
-      return data;
+      const parsedData = JSON.parse(data) as Account[];
+      return parsedData;
   } catch (error) {
     console.error('Ocurrió un error al leer el archivo:', error);
     return [];

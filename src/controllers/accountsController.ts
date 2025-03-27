@@ -1,14 +1,13 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { AccountService } from '../services/accountService.js';
+import { createAccountService } from '../factories/accountServiceFactory';
 
-const accountService = new AccountService();
+const accountService = await createAccountService();
 
 export class AccountController {
     getAccountsByTag: RequestHandler = async (req, res, next)=> {
         const { tag } = req.query;
-        console.log(tag)
         try {
-            const accounts = await accountService.getAccountsByTag('');
+            const accounts = await accountService.getAccountsByTag(tag);
             // console.log(accounts);
             res.status(200).json(accounts);
         } catch (error) {

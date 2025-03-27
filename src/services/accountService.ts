@@ -1,11 +1,12 @@
 import { Account } from '../interfaces/accountInterface.js';
-import { findAllAccounts } from '../repositories/jsonAccountRepository.js';
 
 export class AccountService {
-    private accounts: Promise<Account[]>;
-     constructor(){
-        this.accounts = findAllAccounts();
+    private constructor(private repository: Account[]) {}
+  
+    static async create(repository: Account[]): Promise<AccountService> {
+      return new AccountService(repository);
     }
+
     async getAccountsByTag( tag: string ): Promise<Account[]> {
         try {
             const accounts = await findAllAccounts();
