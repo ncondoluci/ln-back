@@ -1,0 +1,32 @@
+{
+  "name": "ln-back",
+  "version": "1.0.0",
+  "description": "Ejercicio Full Stack - Club La Nacion",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && cpx \"src/utils/*.json\" dist/src/utils",
+    "dev": "tsx watch index.ts",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ncondoluci/ln-back.git"
+  },
+  "author": "Nicolás Condoluci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ncondoluci/ln-back/issues"
+  },
+  "homepage": "https://github.com/ncondoluci/ln-back#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.14",
+    "cpx": "^1.5.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
