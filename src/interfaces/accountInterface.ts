@@ -113,5 +113,9 @@ export interface Tag {
 }
 
 export interface VMAccountTagged {
-
+  url: string;
+  name: string; 
+  location: number
+  type_benefit: string; 
+  images: Image;
 }
