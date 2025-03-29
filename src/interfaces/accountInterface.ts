@@ -116,6 +116,17 @@ export interface VMAccountTagged {
   url: string;
   name: string; 
   location: number
-  type_benefit: string; 
+  type_benefit: VMBenefit[]; 
   images: Image;
+}
+
+export interface VMBenefit {
+  program_name: string;
+  value: number;
+}
+
+export interface VMAccountFlaged {
+  url: string;
+  name:string;
+  image: string;
 }
