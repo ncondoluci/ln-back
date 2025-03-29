@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { AccountController } from '../controllers/accountsController.js';
-import { tagChecker } from '../middlewares/tagChecker';
+import { flagChecker, tagChecker } from '../middlewares/tagChecker';
 
 const router = Router();
 
 const accountController = new AccountController();
 router.get('/getByTag', tagChecker, accountController.getAccountsByTag);
 
-router.get('/', [/* Middlewares */], (req, res, next) => res.json({success: true}));
+router.get('/getByFlag', flagChecker, accountController.getAccountsByFlag);
 
 export default router;
