@@ -32,3 +32,28 @@ cuenta id: "e8c4ba38-0e9f-e711-812e-0ab6811d4821",
 Observamos que la propiedad id_web en el arreglo de objetos "tags" tiene el valor "17" coincidente en todos los objetos la propiedad "name" = "turismo en buenos aires". Optamos por usar este atributo para usar realizar el
 
 Optamos por usar injección de dependencias utilizando el patro Factory y repository para los servicios principales.
+
+Aprovechando el typado que nos provee Typescript, podemos definir métodos privados en las clases, como por ejemplo, getClosestBranch y getHighestBenefit sin la necesidad de validar que sus parámetros no sean null o undefined.
+
+Nos encontramos con una propiedad que no logramos conocer su propósito 'type_weight'
+
+Entendemos que el beneficio aplica los programs names cuyos ids respectivos están en {
+    benefits: {
+        id: [
+            id1,
+            id2
+        ]
+    }
+}
+
+Se puede mejorar la validación del tag, ya que el mismo es un array y prodía tener más de un tag, por lo tanto, validar si en el array hay algún tag con el nombre que buscamos
+
+Suponemos que lo que se busca indicar con "alor de beneficio más alto por cada categoría (Classic,
+Premium o Black)" es:
+Dentro de cada cuenta, extraer el valor más alto de la lista de beneficios en base al programa (clasic, premium o black) sin importar el beneficio en si.
+Quedaria algo como:
+Cuenta: COTO
+BLACK: 15%
+PREMIUM: 10%
+CLASSIC: 5% 
+(más allá de sobre qué aplique el beneficio).
