@@ -1,19 +1,18 @@
-
 export interface DataAPI {
   accounts: Account[];
 }
 
 export interface Account {
   id: string;
-  crmid: string;/* */
-  name: string; /* */
+  crmid: string /* */;
+  name: string /* */;
   isGeoLocal: boolean;
   haveVoucher: boolean;
   cuit: string;
   status: string;
   tags: Tag[];
-  branches: Branch[];/* */
-  benefits: Benefit[]; /* */
+  branches: Branch[] /* */;
+  benefits: Benefit[] /* */;
   phone: null | string;
   email: null | string;
   web: null | string;
@@ -21,7 +20,7 @@ export interface Account {
   created_on: string;
   updated_on: string;
   ecommerce: boolean;
-  images: Image[];/* */
+  images: Image[] /* */;
   relevance: number;
   description: string;
   virtualCard: boolean;
@@ -47,7 +46,7 @@ export interface Benefit {
   program_name: string[];
   name: string;
   type: string;
-  type_benefit: string; /* */
+  type_benefit: string /* */;
   type_weight: number;
   category: string;
   subcategory: string;
@@ -97,7 +96,7 @@ export interface Branch {
   address: string;
   number: string;
   observations: null | string | string;
-  location: number;/* */
+  location: number /* */;
   status: string;
   phone: null | null | string | string;
   virtualCard: boolean;
@@ -113,20 +112,30 @@ export interface Tag {
 }
 
 export interface VMAccountTagged {
+  // AccountTag
   url: string;
-  name: string; 
-  location: number
-  type_benefit: VMBenefit[]; 
-  images: Image;
+  name: string;
+  location: number;
+  type_benefit: ProgramBenefit[];
+  image: Image;
 }
 
-export interface VMBenefit {
+export interface ProgramBenefit {
+  // ProgramBenefit
   program_name: string;
   value: number;
 }
 
 export interface VMAccountFlaged {
+  // AccountFlag
   url: string;
-  name:string;
+  name: string;
   image: string;
+}
+
+export interface AccountFilterOptions {
+  tag: string;
+  limitNum: number;
+  offsetNum: number;
+  orderAscBool: boolean;
 }
