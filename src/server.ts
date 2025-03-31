@@ -1,109 +1,87 @@
+import cors from "cors";
+import http from "http";
 // libs
-import express, { Request, Response, NextFunction } from 'express';
-import cors from 'cors';
-import http from 'http';
+import express, { Request, Response, NextFunction } from "express";
 
 // Routes
-import accountRoutes from './routes/accountRoutes.js';
+import accountRoutes from "./routes/accountRoutes.js";
 
 // Middlewares
-
-// Providers
+import { globalErrorHandler } from "./middlewares/globalErrorHandler.js";
 
 // Utils
-
+import { AppError } from "./utils/appError.js";
 
 class Server {
-    public app: express.Application;
-    public port: string | undefined;
-    private server: http.Server;
-    private paths: Record<string, string>;
-    
-    constructor() {
-        this.app = express();
-        this.port = process.env.PORT || '3000';
+  public app: express.Application;
+  public port: string | undefined;
+  private server: http.Server;
+  private paths: Record<string, string>;
 
-        this.paths = {
-            account: '/api/account'
-        };
+  constructor() {
+    this.app = express();
+    this.port = process.env.PORT || "3000";
 
-        this.server = http.createServer(this.app);
-        this.middlewares();
-        this.routes();
-    }
+    this.paths = {
+      account: "/api/account",
+    };
 
-    // async systemListeners() {
-    //     if(process.env.NODE_ENV === 'production'){
-    //         // Compatibilidad con Windows para capturar SIGINT de manera confiable
-    //             if (process.platform === "win32") {
-    //                 const rl = require("readline").createInterface({
-    //                     input: process.stdin,
-    //                     output: process.stdout
-    //                 });
-    
-    //                 rl.on("SIGINT", async () => {
-                        
-    //                     await this.shutdown('Uncaught Exception');
-    //                     process.emit("SIGINT");
-    //                 });
-    //             } else {
-    //                 process.on('SIGINT', async () => {
-    //                     if(process.env.NODE_ENV === 'production'){
-    //                         console.log('SIGINT received (Ctrl+C). Shutting down gracefully...');
-    //                         process.exit(0);
-    //                     }
-    //                 });
-    //             }
-    //         // Manejar excepciones no capturadas
-    //         process.on('uncaughtException', async (err) => {
-    //             await this.shutdown('Uncaught Exception', err.message);
-    //         });
-    
-    //         // Manejar promesas rechazadas sin manejar
-    //         process.on('unhandledRejection', async (reason: Error) => {
-    //             await this.shutdown('Unhandled Rejection', reason.message);
-    //         });
-    
-    //         // Manejar señal SIGTERM (cierre por el sistema)
-    //         process.on('SIGTERM', async () => {
-    //             console.log('SIGTERM received. Shutting down gracefully...');
+    this.systemListeners();
+    this.middlewares();
+    this.routes();
+    this.server = http.createServer(this.app);
+  }
 
-    //             process.exit(0); // Cerrar el proceso después del cierre ordenado
-    //         });
-    //     }
-    // }
+  private systemListeners() {
+    // Manejar excepciones no capturadas
+    process.on("uncaughtException", async (err) => {
+      console.error("Uncaught Exception:", err);
+      // Podríamos enviar un mail a los administradores con un mailService
+    });
 
-    private routes() {
-        // Register routes
-        this.app.use(this.paths.account, accountRoutes);
+    // Manejar promesas rechazadas sin manejar
+    process.on("unhandledRejection", async (reason: Error) => {
+      console.error("Unhandled Rejection:", reason);
+      // Podríamos enviar un mail a los administradores con un mailService
+    });
 
+    // Manejar señal SIGTERM (cierre por el sistema)
+    process.on("SIGTERM", async () => {
+      console.log("SIGTERM received. Shutting down gracefully...");
 
-        // Catch undefined routes
-        this.app.use('*', (req: Request, res: Response, next: NextFunction) => {
-            res.json({success: false, message: 'Page not found'});
-            // next(new AppError({ message: 'Route not found', statusCode: 404 }));
-        });
+      process.exit(0); // Cerrar el proceso después del cierre ordenado
+    });
+  }
 
-        // Global error handler
-        // this.app.use(globalErrorHandler);
-    }
+  private routes() {
+    // Register routes
+    this.app.use(this.paths.account, accountRoutes);
 
-    private middlewares() {
-        // CORS
-        this.app.use(cors());
+    // Catch undefined routes
+    this.app.use("*", (req: Request, res: Response, next: NextFunction) => {
+      next(new AppError({ message: "Route not found", statusCode: 404 }));
+    });
 
-        // Body parsing
-        this.app.use(express.json());
+    // Global error handler
+    this.app.use(globalErrorHandler);
+  }
 
-        // Public directory
-        this.app.use(express.static('public'));
-    }
+  private middlewares() {
+    // CORS
+    this.app.use(cors());
 
-    public listen() {
-        this.server.listen(this.port, () => {
-            console.log('Server running on port:', this.port);
-        });
-    }
+    // Body parsing
+    this.app.use(express.json());
+
+    // Public directory
+    this.app.use(express.static("public"));
+  }
+
+  public listen() {
+    this.server.listen(this.port, () => {
+      console.log("Server running on port:", this.port);
+    });
+  }
 }
 
 export default Server;
