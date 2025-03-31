@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc && cpx \"src/utils/*.json\" dist/src/utils",
     "dev": "node --env-file=.env --watch --import=tsx index.ts",
-    "test": "test"
+    "test": "jest",
+    "coveage": "jest --collect-coverage"
   },
   "repository": {
     "type": "git",
