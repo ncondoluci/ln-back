@@ -1,7 +1,8 @@
 # LN-Back
+
 Ejercicio full stack club LN
 
-Elegimos utilizar Typescript para reducir errores en tiempo de transpilación y escritura del programa. 
+Elegimos utilizar Typescript para reducir errores en tiempo de transpilación y escritura del programa.
 Elegimos POO para facilitar el testing.
 utilizamos packete cpx como dependencia de desarrollo para realizar la copia de /utils/accounts.json (archivo utilizado como data set).
 
@@ -11,22 +12,22 @@ Observamos que en el data set provisto el arreglo "tags" tiene una propiedad typ
 Ejemplo:
 cuenta id: "c3fdbf4b-3ea4-ea11-8145-0ab6811d4821",
 "tags": [
-    {
-        "name": "Delivery",
-        "id_web": "68154",
-        "type_id": "17",
-        "type": "Productos Club"
-    }
+{
+"name": "Delivery",
+"id_web": "68154",
+"type_id": "17",
+"type": "Productos Club"
+}
 ]
 
 cuenta id: "e8c4ba38-0e9f-e711-812e-0ab6811d4821",
 "tags": [
-    {
-        "name": "Turismo en Buenos Aires",
-        "id_web": "68847",
-        "type_id": "17",
-        "type": "Productos Club"
-    }
+{
+"name": "Turismo en Buenos Aires",
+"id_web": "68847",
+"type_id": "17",
+"type": "Productos Club"
+}
 ]
 
 Observamos que la propiedad id_web en el arreglo de objetos "tags" tiene el valor "17" coincidente en todos los objetos la propiedad "name" = "turismo en buenos aires". Optamos por usar este atributo para usar realizar el
@@ -38,12 +39,12 @@ Aprovechando el typado que nos provee Typescript, podemos definir métodos priva
 Nos encontramos con una propiedad que no logramos conocer su propósito 'type_weight'
 
 Entendemos que el beneficio aplica los programs names cuyos ids respectivos están en {
-    benefits: {
-        id: [
-            id1,
-            id2
-        ]
-    }
+benefits: {
+id: [
+id1,
+id2
+]
+}
 }
 
 Se puede mejorar la validación del tag, ya que el mismo es un array y prodía tener más de un tag, por lo tanto, validar si en el array hay algún tag con el nombre que buscamos
@@ -55,5 +56,7 @@ Quedaria algo como:
 Cuenta: COTO
 BLACK: 15%
 PREMIUM: 10%
-CLASSIC: 5% 
+CLASSIC: 5%
 (más allá de sobre qué aplique el beneficio).
+
+Aclaramos que como no hay servicio de base de datos, optamos por hacer el servicio sincrono, por ende, los métodos de mi controlador no usan async/await. Optativamente, podría haber configurado los métodos getAccountsByTag y getAccountByFlag para que devuelvan una promesa y, en ese caso, si usaríamos async/await.
