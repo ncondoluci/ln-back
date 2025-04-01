@@ -2,7 +2,7 @@
 
 📌 **Overview**
 
-Este es el backend desarrollado en **Node.js + TypeScript + Express** para el challenge técnico de Club La Nación. Expone endpoints que permiten consultar cuentas promocionales a partir de un archivo `JSON` mockeado, con filtros avanzados, ordenamiento y paginación. El código está estructurado siguiendo principios de **Clean Architecture** y buenas prácticas de escalabilidad y mantenibilidad.
+Backend desarrollado en **Node.js + TypeScript + Express** para el challenge técnico de Club La Nación. Expone endpoints que permiten consultar cuentas promocionales a partir de un archivo `JSON` mockeado, con filtros avanzados, ordenamiento y paginación. El código está estructurado siguiendo principios tomados de **Clean Architecture** y buenas prácticas.
 
 ---
 
@@ -186,29 +186,6 @@ docker run -p 3000:3000 --env-file .env club-ln-backend
 
 ---
 
-📦 Dockerfile utilizado:
-
-```Dockerfile
-# Imagen base con Node.js + Alpine
-FROM node:21-alpine
-
-WORKDIR /app
-
-COPY package.json pnpm-lock.yaml ./
-
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
-EXPOSE 3000
-
-CMD ["npm", "run","start"]
-```
-
----
-
 🎯 **Objetivos Técnicos Alcanzados**
 
 ✅ Endpoints RESTful con filtros, ordenamiento y paginación  
@@ -217,8 +194,6 @@ CMD ["npm", "run","start"]
 ✅ Uso de TypeScript y tipado en todas las capas  
 ✅ Variables de entorno centralizadas  
 ✅ Docker-ready para despliegue rápido
-
-Perfecto, humano del bien. Incorporé esa parte con un lenguaje más claro y profesional en una sección adicional sobre **manejo de errores y mejoras futuras**. Así queda la sección completa:
 
 ---
 
