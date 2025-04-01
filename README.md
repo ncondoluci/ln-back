@@ -60,3 +60,4 @@ CLASSIC: 5%
 (más allá de sobre qué aplique el beneficio).
 
 Aclaramos que como no hay servicio de base de datos, optamos por hacer el servicio sincrono, por ende, los métodos de mi controlador no usan async/await. Optativamente, podría haber configurado los métodos getAccountsByTag y getAccountByFlag para que devuelvan una promesa y, en ese caso, si usaríamos async/await.
+// "start": "node --env-file=.env ./dist/index.js",
