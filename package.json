@@ -5,9 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node --env-file=.env ./dist/index.js",
     "build": "tsc && cpx \"src/utils/*.json\" dist/src/utils",
-    "dev": "node --env-file=.env --watch --import=tsx index.ts",
+    "dev": "node --env-file=.env --watch --import=tsx ./src/index.ts",
     "test": "jest",
+    "test:watch": "jest --watch",
     "coveage": "jest --collect-coverage"
   },
   "repository": {
@@ -21,9 +23,11 @@
   },
   "homepage": "https://github.com/ncondoluci/ln-back#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.14",

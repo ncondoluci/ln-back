@@ -23,7 +23,7 @@ class Server {
     this.port = process.env.PORT || "3000";
 
     this.paths = {
-      account: "/api/account",
+      account: "/api/accounts",
     };
 
     this.systemListeners();
@@ -43,13 +43,6 @@ class Server {
     process.on("unhandledRejection", async (reason: Error) => {
       console.error("Unhandled Rejection:", reason);
       // Podríamos enviar un mail a los administradores con un mailService
-    });
-
-    // Manejar señal SIGTERM (cierre por el sistema)
-    process.on("SIGTERM", async () => {
-      console.log("SIGTERM received. Shutting down gracefully...");
-
-      process.exit(0); // Cerrar el proceso después del cierre ordenado
     });
   }
 

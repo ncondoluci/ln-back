@@ -1,10 +1,14 @@
 import { RequestHandler } from "express";
-import { createAccountService } from "../factories/accountServiceFactory";
-import { AppError } from "../utils/appError";
-
-const accountService = await createAccountService();
+import { AppError } from "../utils/appError.js";
+import { AccountService } from "../services/accountService.js";
 
 export class AccountController {
+  private accountService: AccountService;
+
+  constructor(accountService: AccountService) {
+    this.accountService = accountService;
+  }
+
   getAccountsByTag: RequestHandler = (req, res, next) => {
     const {
       tag,
@@ -14,7 +18,7 @@ export class AccountController {
     } = req.query as Record<string, string>;
 
     try {
-      const accounts = accountService.getAccountsVMByTag(
+      const accounts = this.accountService.getAccountsVMByTag(
         tag,
         limit,
         offset,
@@ -47,7 +51,7 @@ export class AccountController {
     } = req.query as Record<string, string>;
 
     try {
-      const accounts = accountService.getAccountByFlag(
+      const accounts = this.accountService.getAccountByFlag(
         haveVoucher,
         limit,
         offset,

@@ -1,4 +1,4 @@
-import { IAppError } from "../interfaces/errorInterface";
+import { IAppError } from "../interfaces/errorInterface.js";
 
 class AppError extends Error implements IAppError {
   public statusCode: number;

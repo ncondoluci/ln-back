@@ -1,4 +1,4 @@
-import { ProgramPriority, programPriorityMap } from "../enums/benefits.enums";
+import { ProgramPriority, programPriorityMap } from "../enums/benefitsEnums.js";
 import {
   Account,
   Benefit,
@@ -6,7 +6,7 @@ import {
   VMAccountTagged,
   ProgramBenefit,
   AccountFilterOptions,
-} from "../interfaces/accountInterface";
+} from "../interfaces/accountInterface.js";
 
 export function prepareViewModel(
   repository: Account[],

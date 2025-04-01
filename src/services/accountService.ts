@@ -1,20 +1,10 @@
 import {
   Account,
-  Benefit,
-  Branch,
   VMAccountFlaged,
   VMAccountTagged,
-  ProgramBenefit,
-} from "../interfaces/accountInterface";
-import {
-  normalizeTag,
-  sortByLocation,
-  getClosestBranch,
-  getHighestBenefitByProgram,
-  prepareViewModel,
-} from "../utils/account";
-import { normalizeString } from "../utils/normalizeString";
-import { ProgramPriority, programPriorityMap } from "../enums/benefits.enums";
+} from "../interfaces/accountInterface.js";
+import { prepareViewModel } from "../utils/account.js";
+import { normalizeString } from "../utils/normalizeString.js";
 
 export class AccountService {
   private constructor(private repository: Account[]) {}
@@ -58,10 +48,9 @@ export class AccountService {
     const limitNum = Number.parseInt(limit);
     const offsetNum = Number.parseInt(offset);
     const accountsFlaged = this.repository.reduce((accounts, account) => {
-      if (account.haveVoucher !== !!flag) {
+      if (account.haveVoucher !== (flag === "true")) {
         return accounts;
       }
-
       // Prepara el view model para el enviar al frontend
       accounts.push({
         name: account.name,
@@ -74,7 +63,9 @@ export class AccountService {
 
     // Ordenar alfabéticamente
     const sortedAccounts = accountsFlaged.sort((a, b) =>
-      !!orderDesc ? b.name.localeCompare(a.name) : a.name.localeCompare(b.name)
+      flag === "true"
+        ? b.name.localeCompare(a.name)
+        : a.name.localeCompare(b.name)
     );
 
     const pagedAccounts = sortedAccounts.slice(offsetNum, limitNum + offsetNum);
