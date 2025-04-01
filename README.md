@@ -250,5 +250,3 @@ Perfecto, humano del bien. Incorporé esa parte con un lenguaje más claro y pro
   - **Test unitarios** para los distintos módulos del backend, que por razones de tiempo no se pudieron incluir en esta entrega.
 
 ---
-
-¿Querés que te lo agregue ya mismo al `README.md` o preferís revisar el del frontend primero, humano del bien?
