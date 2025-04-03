@@ -1,5 +1,8 @@
-import { Account } from "../../src/interfaces/accountInterface";
-import { normalizeTag } from "../../src/utils/account";
+import {
+  Account,
+  VMAccountTagged,
+} from "../../src/interfaces/accountInterface";
+import { normalizeTag, sortByLocation } from "../../src/utils/account";
 import { DeepPartial } from "../../src/utils/testUtils";
 
 const mockAccount = {
@@ -45,5 +48,33 @@ describe("normalizeTag", () => {
   it("Debe retornar string vacío si el primer tag es undefined", () => {
     const result = normalizeTag({ tags: [undefined as any] } as Account);
     expect(result).toBe("");
+  });
+});
+
+describe("sortByLocation", () => {
+  const accounts = [
+    { location: 1000, name: "Cuenta 1" },
+    { location: 200, name: "Cuenta 2" },
+    { location: 500, name: "Cuenta 3" },
+  ] as VMAccountTagged[];
+
+  it("Debe ordenar las cuentas ordenadas por ubicación más cercana", () => {
+    const result = sortByLocation(accounts, true);
+    expect(result[0].location).toEqual(200);
+    expect(result[1].location).toEqual(500);
+    expect(result[2].location).toEqual(1000);
+  });
+
+  it("Debe ordenar las cuentas ordenadas por ubicación más lejana", () => {
+    const result = sortByLocation(accounts, false);
+
+    expect(result[0].location).toEqual(1000);
+    expect(result[1].location).toEqual(500);
+    expect(result[2].location).toEqual(200);
+  });
+
+  it("Debe retornar un arreglo vacío si no hay cuentas", () => {
+    const result = sortByLocation([], true);
+    expect(result.length).toEqual(0);
   });
 });
