@@ -1,16 +1,19 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} **/
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 export default {
+  preset: "ts-jest/presets/default-esm",
   testEnvironment: "node",
   transform: {
-    "^.+\.tsx?$": ["ts-jest", {
-      useESM: true,
-      tsconfig: "tsconfig.test.json"
-    }],
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        useESM: true,
+        tsconfig: "tsconfig.test.json",
+      },
+    ],
   },
+  extensionsToTreatAsEsm: [".ts"],
   moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1',
+    "^(\\.{1,2}/.*)\\.js$": "$1", // permite importar archivos .js en módulos ESM
   },
-  extensionsToTreatAsEsm: ['.ts'],
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  setupFiles: ['<rootDir>/jest.setup.js']
+  testMatch: ["<rootDir>/__tests__/**/*.test.ts"],
 };

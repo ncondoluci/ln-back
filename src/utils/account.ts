@@ -46,7 +46,10 @@ export function prepareViewModel(
   );
 }
 
-export function normalizeTag(account: Account) {
+export function normalizeTag(account: Partial<Account>) {
+  if (!account.tags || account.tags.length === 0) {
+    return "";
+  }
   return (account.tags[0]?.name ?? "").replaceAll(" ", "").toLowerCase();
 }
 
