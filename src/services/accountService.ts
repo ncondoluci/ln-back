@@ -63,7 +63,7 @@ export class AccountService {
 
     // Ordenar alfabéticamente
     const sortedAccounts = accountsFlaged.sort((a, b) =>
-      flag === "true"
+      orderDesc === "true"
         ? b.name.localeCompare(a.name)
         : a.name.localeCompare(b.name)
     );
